@@ -1,0 +1,60 @@
+# ==============================================================
+# Enables the configuration check. Used for troubleshooting
+# ==============================================================
+configuration-check:  true
+
+
+configuration:
+  # General configuration needed for this program to run.
+
+
+  # ====================================================
+  # Specifies the service. Valid options: gitlab, github
+  # ====================================================
+  service: gitlab
+
+  # =============================================================================================
+  # Also known as "Secret" must be the same as in Webhook configuration depending on your service
+  # =============================================================================================
+  token: some secure secret
+
+  # =======================================
+  # The port that is used for this program.
+  # =======================================
+  port: 750
+
+  # =======================================================
+  # Command that should be used when an pull request comes.
+  # =======================================================
+  command-pull: git -C /dir/dir pull origin
+
+
+additional-configuration:
+  # Additional confuguration
+
+
+  push:
+    # =======================
+    # Enables the push option
+    # =======================
+    enabled: false
+
+    # =======================================================
+    # Command that should be used when an push request comes.
+    # =======================================================
+    command-push: git -C /dir/dir push origin
+
+discord-interaction:
+  # Discord Interaction configuration
+  # * lets you execute pull and push on press of an button in message send by built-in bot
+
+
+  # =====================================================================================================
+  # Enables / Disables this function
+  # =====================================================================================================
+  enabled: true
+
+  # =====================================================================================================
+  # Bot token needed to run the bot. Can be found on discord developers
+  # =====================================================================================================
+  bot-token: bot token
