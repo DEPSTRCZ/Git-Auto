@@ -1,8 +1,7 @@
 # ==============================================================
-# Enables the configuration check. Used for troubleshooting
+# Enables the debug mode. Used for troubleshooting when problems appear.
 # ==============================================================
-configuration-check:  true
-
+debug_mode: false
 
 configuration:
   # General configuration needed for this program to run.
@@ -16,7 +15,7 @@ configuration:
   # =============================================================================================
   # Also known as "Secret" must be the same as in Webhook configuration depending on your service
   # =============================================================================================
-  token: some secure secret
+  token: some
 
   # =======================================
   # The port that is used for this program.
@@ -24,12 +23,12 @@ configuration:
   port: 750
 
   # =======================================================
-  # Command that should be used when an pull request comes.
+  # Command that should be used when an pull request comes. git -C /dir/dir pull origin
   # =======================================================
-  command-pull: git -C /dir/dir pull origin
+  command_pull: ls
 
 
-additional-configuration:
+additional_configuration:
   # Additional confuguration
 
 
@@ -37,14 +36,14 @@ additional-configuration:
     # =======================
     # Enables the push option
     # =======================
-    enabled: false
+    enabled:  true
 
     # =======================================================
     # Command that should be used when an push request comes.
     # =======================================================
-    command-push: git -C /dir/dir push origin
+    command_push: git -C /dir/dir push origin
 
-discord-interaction:
+discord_interaction:
   # Discord Interaction configuration
   # * lets you execute pull and push on press of an button in message send by built-in bot
 
@@ -57,4 +56,9 @@ discord-interaction:
   # =====================================================================================================
   # Bot token needed to run the bot. Can be found on discord developers
   # =====================================================================================================
-  bot-token: bot token
+  bot_token: bot token
+
+  # =====================================================================================================
+  # Specifies if the bot should send logs (start,pushing,pulling,failed,unauthorized request)
+  # =====================================================================================================
+  logs: true
