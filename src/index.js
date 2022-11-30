@@ -1,59 +1,27 @@
-const yaml = require('js-yaml');
-const fs = require('fs');
-const express = require("express");
+import yaml from "js-yaml";
+import fs from "fs";
+import express from "express";
+import * as CryptoJS from 'crypto-js';
+import { exec } from "child_process";
+import { checkconfig } from "./check.js";
 const app = express();
-const { exec } = require("child_process");
 const config = yaml.load(fs.readFileSync('../config.yml', 'utf8'));
 let service = "";
 // Loading
-console.log("\x1b[43m","INFO:","\x1b[0m","Checking config.yml Please wait...");
+await checkconfig()
 // checker
-console.log(config.configuration.service)
-if(typeof config.debug_mode !== "boolean") {
-    console.log("\x1b[41m","CONFIG ERR:","\x1b[0m","In \"debug_mode\" Line: 4"); 
-    throw new Error("Value must be type of boolean!");
-}
-if(! (config.configuration.service === "gitlab" || config.configuration.service === "github")) {
-    console.log("\x1b[41m","CONFIG ERR:","\x1b[0m","In \"configuration/service\" Line: 13");
-    throw new Error("Value must be \"gitlab\" or \"github\"!");
-}
-if(typeof config.configuration.token !== "string") {
-    console.log("\x1b[41m","CONFIG ERR:","\x1b[0m","In \"configuration/token\" Line: 18");
-     throw new Error("Value must be string!");
-}
-if(typeof config.configuration.port !== "number") {
-    console.log("\x1b[41m","CONFIG ERR:","\x1b[0m","In \"configuration/port\" Line: 23");
-    throw new Error("Value must be number!");
-}
-if(typeof config.configuration.command_pull !== "string") {
-    console.log("\x1b[41m","CONFIG ERR:","\x1b[0m","In \"configuration/command_pull\" Line: 28");
-    throw new Error("Value must be string!");
-}
-if(typeof config.additional_configuration.push.enabled !== "boolean") {
-    console.log("\x1b[41m","CONFIG ERR:","\x1b[0m","In \"additional_configuration/enabled\" Line: 39");
-    throw new Error("Value must be boolean!");
-}
-if(typeof config.additional_configuration.push.command_push !== "string") {
-    console.log("\x1b[41m","CONFIG ERR:","\x1b[0m","In \"additional_configuration/command_push\" Line: 44");
-    throw new Error("Value must be string!");
-}
-if(config.configuration.service === "gitlab") {
-    service = "X-Gitlab-Token HTTP"
-} else {
-    service = "s"
-}
 
-console.log("\x1b[32m","╔════════════════════════╗","\x1b[0m","\n\x1b[32m","  Git Auto -","\x1b[33m","Started..","\n\x1b[32m","╚════════════════════════╝","\x1b[0m");
-console.log("\x1b[43m","INFO:","\x1b[0m","Config.yml marked as valid.. Continuing");
+
 if(config.debug_mode) console.log("\x1b[43m","INFO:","\x1b[0m","Debug mode is enabled!");
 if(config.additional_configuration.push.enabled) console.log("\x1b[43m","INFO:","\x1b[0m","Push function is enabled!");
 if(config.discord_interaction.enabled) console.log("\x1b[43m","INFO:","\x1b[0m","Discord interaction is enabled!");
 if(config.discord_interaction.logs) console.log("\x1b[43m","INFO:","\x1b[0m","Discord interaction logs are enabled!");
+console.log("\x1b[32m","╔════════════════════════╗","\x1b[0m","\n\x1b[32m","  Git Auto -","\x1b[33m","Started..","\n\x1b[32m","╚════════════════════════╝","\x1b[0m");
 // Embeds
 //const started = embed discord
 // App listen
 app.listen(750, function(err){
-    console.log("\x1b[44m","APP:","\x1b[0m","Started listening on:","\x1b[4m",`http://<publicip>:${config.configuration.port}/deploy`);
+    console.log("\x1b[44m","APP:","\x1b[0m","Started listening on:","\x1b[4m",`http://<publicip>:${config.configuration.port}/deploy`,"\x1b[0m");
 })
 app.use((req, res, next) => {
     if (req.url === '/deploy' && req.method === 'POST') return next();

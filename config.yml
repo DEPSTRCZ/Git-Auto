@@ -29,6 +29,7 @@ configuration:
 
 
 additional_configuration:
+  # NOT IMPLEMENTED YET
   # Additional confuguration
 
 
@@ -44,6 +45,7 @@ additional_configuration:
     command_push: git -C /dir/dir push origin
 
 discord_interaction:
+  # NOT IMPLEMENTED YET!
   # Discord Interaction configuration
   # * lets you execute pull and push on press of an button in message send by built-in bot
 
