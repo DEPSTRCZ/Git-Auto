@@ -24,21 +24,10 @@ export async function checkconfig() {
         console.log("\x1b[41m","CONFIG ERR:","\x1b[0m","In \"configuration/command_pull\" Line: 28");
         throw new Error("Value must be string!");
     }
-    if(typeof config.additional_configuration.push.enabled !== "boolean") {
-        console.log("\x1b[41m","CONFIG ERR:","\x1b[0m","In \"additional_configuration/enabled\" Line: 39");
-        throw new Error("Value must be boolean!");
-    }
-    if(typeof config.additional_configuration.push.command_push !== "string") {
-        console.log("\x1b[41m","CONFIG ERR:","\x1b[0m","In \"additional_configuration/command_push\" Line: 44");
-        throw new Error("Value must be string!");
-    }
-
-    if(config.configuration.service === "gitlab") {
-        service = "X-Gitlab-Token HTTP"
-    } else {
-        service = "X-Hub-Signature-256"
-    }    
 
     console.log("\x1b[43m","INFO:","\x1b[0m","Config.yml marked as valid.. Continuing");
 
+    if(config.debug_mode) console.log("\x1b[43m","INFO:","\x1b[0m","Debug mode is enabled!");
+    if(config.discord_interaction.enabled) console.log("\x1b[43m","INFO:","\x1b[0m","Discord interaction is enabled!");
+    if(config.discord_interaction.logs) console.log("\x1b[43m","INFO:","\x1b[0m","Discord interaction logs are enabled!");
 }

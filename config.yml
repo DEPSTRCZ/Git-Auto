@@ -10,12 +10,12 @@ configuration:
   # ====================================================
   # Specifies the service. Valid options: gitlab, github
   # ====================================================
-  service: gitlab
+  service: github
 
   # =============================================================================================
   # Also known as "Secret" must be the same as in Webhook configuration depending on your service
   # =============================================================================================
-  token: some
+  token: SUS123
 
   # =======================================
   # The port that is used for this program.
@@ -25,29 +25,11 @@ configuration:
   # =======================================================
   # Command that should be used when an pull request comes. git -C /dir/dir pull origin
   # =======================================================
-  command_pull: ls
-
-
-additional_configuration:
-  # NOT IMPLEMENTED YET
-  # Additional confuguration
-
-
-  push:
-    # =======================
-    # Enables the push option
-    # =======================
-    enabled:  true
-
-    # =======================================================
-    # Command that should be used when an push request comes.
-    # =======================================================
-    command_push: git -C /dir/dir push origin
+  command_pull: a
 
 discord_interaction:
-  # NOT IMPLEMENTED YET!
   # Discord Interaction configuration
-  # * lets you execute pull and push on press of an button in message send by built-in bot
+  # Webhook notifications
 
 
   # =====================================================================================================
@@ -56,11 +38,6 @@ discord_interaction:
   enabled: true
 
   # =====================================================================================================
-  # Bot token needed to run the bot. Can be found on discord developers
+  # Webhook url. Can be created in the Discord server settings.
   # =====================================================================================================
-  bot_token: bot token
-
-  # =====================================================================================================
-  # Specifies if the bot should send logs (start,pushing,pulling,failed,unauthorized request)
-  # =====================================================================================================
-  logs: true
+  webhookurl: https://discord.com/api/webhooks/879660573795708928/W5T89WaSXvWEMqLbRcdPIGvK2DW2GB1AdmjZzecwB-VFM2Zc7XAVe8Dt_uTJrW6gLrke
